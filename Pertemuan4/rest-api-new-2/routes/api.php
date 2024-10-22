@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
 
 // Route::get('/user', function(){
-//     return "Hallo saya Pacarnya Farida";
+//     return "Hallo saya royhan";
 // });
 
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AnimalController extends Controller
 {
 
-    public $animals = ['kumbang', 'kelinci', 'paus','ubur-ubur'];
+    public $animals = ['kucing', 'ayam', 'ikan'];
     public function __construct()
     {
 
