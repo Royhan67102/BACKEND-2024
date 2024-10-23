@@ -4,9 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
 
-// Route::get('/user', function(){
-//     return "Hallo saya royhan";
-// });
+Route::get('/user', function(){
+    return "Hallo saya royhan";
+});
 
 
 Route::get('/animals', [AnimalController::class, 'index']);
