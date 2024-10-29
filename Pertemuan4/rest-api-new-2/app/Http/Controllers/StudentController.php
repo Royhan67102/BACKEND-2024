@@ -49,7 +49,13 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = Student::find($id);
+
+        if (!$student) {
+            return response()->json(['message' => 'Siswa tidak ditemukan'], 404);
+        }
+
+        return response()->json(['data' => $student], 200);
     }
 
     /**
