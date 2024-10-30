@@ -81,7 +81,7 @@ class StudentController extends Controller
         if ($student) {
 
             $input = [
-                'nama' => $request->nama ?? $student->nama,
+                'name' => $request->name ?? $student->name,
                 'nim' => $request->nim ?? $student->nim,
                 'email' => $request->email ?? $student->email,
                 'jurusan' => $request->jurusan ?? $student->jurusan
