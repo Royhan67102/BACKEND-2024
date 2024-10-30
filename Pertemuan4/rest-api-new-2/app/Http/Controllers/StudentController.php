@@ -52,41 +52,85 @@ class StudentController extends Controller
         $student = Student::find($id);
 
         if (!$student) {
-            return response()->json(['message' => 'Siswa tidak ditemukan'], 404);
+
+            $data = [
+                'message' => 'Get detail student',
+                'data' => $student,
+            ];
+
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student not found',
+            ];
+
+            return response()->json($data, 404);
         }
 
-        return response()->json(['data' => $student], 200);
+
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, $id) {
+
         $student = Student::find($id);
 
-        if (!$student) {
-            return response()->json(['message' => 'Siswa tidak ditemukan'], 404);
+        if ($student) {
+
+            $input = [
+                'nama' => $request->nama ?? $student->nama,
+                'nim' => $request->nim ?? $student->nim,
+                'email' => $request->email ?? $student->email,
+                'jurusan' => $request->jurusan ?? $student->jurusan
+            ];
+
+
+            $student->update($input);
+
+            $data = [
+                'message' => 'Student is updated',
+                'data' => $student
+            ];
+
+
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student not found'
+            ];
+
+            return response()->json($data, 404);
         }
-
-        $student->update($request->only(['name', 'nim', 'email', 'jurusan']));
-
-        return response()->json(['message' => 'Data siswa berhasil diperbarui', 'data' => $student], 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+   public function destroy( $id)
     {
         $student = Student::find($id);
 
-        if (!$student) {
-            return response()->json(['message' => 'Siswa tidak ditemukan'], 404);
+        if ($student) {
+
+            $student->delete();
+
+            $data = [
+                'message' => 'Student is deleted'
+            ];
+            return response()->json($data, 200);
         }
 
-        $student->delete();
+        else {
+            $data = [
+                'message' => 'Student not found'
+            ];
 
-        return response()->json(['message' => 'Siswa berhasil dihapus'], 200);
-    }
+            return response()->json($data, 404);
+  }
+
+}
 }
