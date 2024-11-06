@@ -12,11 +12,24 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+       // Mengambil semua data student
+       $students = Student::all();
 
+    // Cek apakah data kosong
+       if ($students->isEmpty()) {
+        // Jika kosong, tampilkan pesan khusus
         $response = [
-            'data' => $students,
-            'message' => 'Berhasil menampilkan semua data students'
+            'message' => 'Belum ada data student yang tersedia',
+            'data' => []
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    // Jika ada data, tampilkan data student
+        $response = [
+        'data' => $students,
+        'message' => 'Berhasil menampilkan semua data students'
         ];
 
         return response()->json($response, 200);
