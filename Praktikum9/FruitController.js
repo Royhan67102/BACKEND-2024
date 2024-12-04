@@ -14,7 +14,6 @@ const fruits = require ("./fruits.js");
  * hint - Gunakan looping for of
  */
 const index = () => {
-    console.log("Method index - Menampilkan Buah");
     for (const fruit of fruits){
         console.log(fruit);
     }
@@ -48,7 +47,7 @@ const update = (position, name) => {
     if (position >= 0 && position < fruits.length) {
         fruits[position] = name;
     } else {
-        console.log("\nError: Invalid position");
+        console.log("\nPosisi tidak valid/tidak ada");
     }
     index();
 };
@@ -67,7 +66,7 @@ const destroy = (position) => {
     if (position >= 0 && position < fruits.length) {
         fruits.splice(position, 1);
     } else {
-        console.log("\nError: Invalid position");
+        console.log("\nPosisi tidak valid/tidak ada");
     }
     index();
 };

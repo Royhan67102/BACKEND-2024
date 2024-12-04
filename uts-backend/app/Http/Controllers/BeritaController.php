@@ -7,27 +7,53 @@ use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
+
     public function index()
-{
-    // Mengambil semua data dari model
-    $beritas = Berita::all();
+    {
+        $beritas = Berita::all();
+
+        if ($beritas->isNotEmpty()) {
+            $response = [
+                'message' => 'Get All Resource',
+                'data' => $beritas,
+                'kode status' => 200
+            ];
+
+            return response()->json($response, 200);
+        } else {
+            return response()->json([
+                'message' => 'Data is empty',
+                'kode status' => 200
+            ], 200);
+        }
+    }
+
+    public function getByCategory($category)
+    {
+    // Mengambil data berdasarkan kategori
+    $beritas = Berita::where('category', $category)->get();
 
     // Cek apakah data ada
     if ($beritas->isNotEmpty()) {
         $response = [
-            'message' => 'Get All Resource',
+            'message' => "Get {$category} Resource",
             'data' => $beritas,
             'kode status' => 200
         ];
 
         return response()->json($response, 200);
-    } else {
+        } else {
         return response()->json([
             'message' => 'Data is empty',
             'kode status' => 200
         ], 200);
+        }
     }
-}
+
+
+
+
+
 
 
     public function store(Request $request)
@@ -123,5 +149,58 @@ class BeritaController extends Controller
     }
 
 
+    public function getSport()
+    {
+        $sports = Berita::where('category', 'sport')->get();
+
+        if ($sports->isNotEmpty()) {
+        return response()->json([
+            'message' => 'Get Sport Resource',
+            'data' => $sports,
+            'kode status' => 200
+        ], 200);
+        } else {
+        return response()->json([
+            'message' => 'Data is empty',
+            'kode status' => 200
+        ], 200);
+        }
+    }
+
+    public function getFinance()
+    {
+        $finances = Berita::where('category', 'finance')->get();
+
+        if ($finances->isNotEmpty()) {
+        return response()->json([
+            'message' => 'Get Finance Resource',
+            'data' => $finances,
+            'kode status' => 200
+        ], 200);
+        } else {
+        return response()->json([
+            'message' => 'Data is empty',
+            'kode status' => 200
+        ], 200);
+        }
+    }
+
+    public function getAutomotive()
+    {
+        $automotives = Berita::where('category', 'automotive')->get();
+
+        if ($automotives->isNotEmpty()) {
+        return response()->json([
+            'message' => 'Get Automotive Resource',
+            'data' => $automotives,
+            'kode status' => 200
+        ], 200);
+        } else {
+        return response()->json([
+            'message' => 'Data is empty',
+            'kode status' => 200
+        ], 200);
+        }
+    }
 
 }
